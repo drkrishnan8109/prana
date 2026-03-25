@@ -100,7 +100,7 @@ export async function refreshAccessToken(
   const accessToken = jwt.sign(
     { id: user.id, email: user.email, role: user.role },
     process.env.JWT_SECRET!,
-    { expiresIn: process.env.JWT_EXPIRES_IN ?? '15m' }
+    { expiresIn: (process.env.JWT_EXPIRES_IN ?? '15m') as jwt.SignOptions['expiresIn'] }
   );
   return { accessToken };
 }
@@ -226,7 +226,7 @@ async function generateTokens(
   const accessToken = jwt.sign(
     { id: user.id, email: user.email, role: user.role },
     process.env.JWT_SECRET!,
-    { expiresIn: process.env.JWT_EXPIRES_IN ?? '15m' }
+    { expiresIn: (process.env.JWT_EXPIRES_IN ?? '15m') as jwt.SignOptions['expiresIn'] }
   );
 
   const rawRefresh = crypto.randomBytes(48).toString('hex');
