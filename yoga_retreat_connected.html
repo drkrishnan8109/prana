@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Prana Grove – Yoga Retreat & Courses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --g1: #0d2b1c; --g2: #1a3d2b; --g3: #2d6a4f; --g4: #52b788; --g5: #b7e4c7; --g6: #d8f3dc;
+    --b1: #013a63; --b2: #0077b6; --b3: #00b4d8; --b4: #90e0ef;
+    --cream: #f8f4ef; --ivory: #fdfcf9; --bark: #8b6f5c; --sand: #e8ddd0;
+    --text: #1a1a1a; --muted: #5a6472; --radius: 12px; --shadow: 0 4px 24px rgba(13,43,28,0.10);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Nunito', sans-serif; background: var(--ivory); color: var(--text); overflow-x: hidden; }
+  h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }
+  .view { display: none; } .view.active { display: block; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(253,252,249,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--sand);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 68px;
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--g2); letter-spacing: 0.02em; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+  .nav-logo span { color: var(--b2); }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: color 0.2s; letter-spacing: 0.03em; }
+  .nav-links a:hover, .nav-links a.active-link { color: var(--g2); }
+  .nav-cta { background: var(--g2); color: #fff; border: none; padding: 9px 22px; border-radius: 50px; font-size: 0.85rem; font-family: 'Nunito', sans-serif; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--g3); }
+  .admin-badge { background: var(--b2); color: #fff; padding: 5px 14px; border-radius: 50px; font-size: 0.78rem; font-weight: 600; cursor: pointer; }
+
+  .hero { min-height: 100vh; padding-top: 68px; background: linear-gradient(160deg, var(--g1) 0%, var(--g2) 45%, var(--b1) 100%); display: flex; align-items: center; position: relative; overflow: hidden; }
+  .hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.25; }
+  .hero-orb1 { width: 500px; height: 500px; background: var(--g4); top: -100px; right: -50px; }
+  .hero-orb2 { width: 400px; height: 400px; background: var(--b3); bottom: -80px; left: 10%; }
+  .hero-content { position: relative; z-index: 2; padding: 0 5%; max-width: 700px; animation: fadeUp 1s ease both; }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(32px); } to { opacity:1; transform: translateY(0); } }
+  .hero-tag { display: inline-block; background: rgba(82,183,136,0.2); color: var(--g5); padding: 5px 16px; border-radius: 50px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(82,183,136,0.3); }
+  .hero h1 { font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 300; color: #fff; line-height: 1.08; margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+  .hero h1 em { font-style: italic; color: var(--g5); }
+  .hero p { color: rgba(255,255,255,0.72); font-size: 1.1rem; line-height: 1.8; margin-bottom: 2.5rem; font-weight: 300; max-width: 520px; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--g4); color: var(--g1); padding: 14px 32px; border-radius: 50px; border: none; font-size: 0.95rem; font-weight: 700; font-family: 'Nunito', sans-serif; cursor: pointer; transition: all 0.2s; letter-spacing: 0.02em; }
+  .btn-primary:hover { background: var(--g5); transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: #fff; padding: 14px 32px; border-radius: 50px; border: 1.5px solid rgba(255,255,255,0.35); font-size: 0.95rem; font-weight: 600; font-family: 'Nunito', sans-serif; cursor: pointer; transition: all 0.2s; }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.08); }
+  .hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,0.4); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .scroll-line { width: 1px; height: 40px; background: rgba(255,255,255,0.25); animation: scrollPulse 1.8s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%,100%{opacity:0.3;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.3)} }
+
+  section { padding: 5rem 5%; }
+  .section-tag { display: inline-block; color: var(--g3); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; color: var(--g1); margin-bottom: 1rem; }
+  .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.8; max-width: 560px; font-weight: 300; }
+
+  .pillars { background: var(--cream); }
+  .pillars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .pillar-card { background: var(--ivory); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--sand); transition: transform 0.2s, box-shadow 0.2s; }
+  .pillar-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .pillar-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .pillar-card h3 { font-size: 1.35rem; font-weight: 400; color: var(--g2); margin-bottom: 0.5rem; }
+  .pillar-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; font-weight: 300; }
+
+  .courses-section { background: var(--ivory); }
+  .courses-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .course-card { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--sand); background: #fff; transition: transform 0.2s, box-shadow 0.2s; }
+  .course-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .course-thumb { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 4rem; position: relative; overflow: hidden; }
+  .course-thumb.green { background: linear-gradient(135deg, var(--g6) 0%, var(--g5) 100%); }
+  .course-thumb.blue { background: linear-gradient(135deg, #e0f7fa 0%, var(--b4) 100%); }
+  .course-thumb.teal { background: linear-gradient(135deg, #e8f5e9 0%, #b2dfdb 100%); }
+  .course-body { padding: 1.25rem 1.5rem 1.5rem; }
+  .course-level { display: inline-block; padding: 3px 12px; border-radius: 50px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .level-beginner { background: var(--g6); color: var(--g2); }
+  .level-intermediate { background: #e3f2fd; color: var(--b2); }
+  .level-advanced { background: #fff3e0; color: #e65100; }
+  .course-body h3 { font-size: 1.25rem; font-weight: 400; color: var(--g1); margin-bottom: 0.5rem; }
+  .course-body p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; font-weight: 300; margin-bottom: 1rem; }
+  .course-meta { display: flex; align-items: center; justify-content: space-between; }
+  .course-price { font-size: 1.3rem; font-family: 'Cormorant Garamond', serif; font-weight: 600; color: var(--g2); }
+  .course-price small { font-family: 'Nunito', sans-serif; font-size: 0.75rem; color: var(--muted); font-weight: 400; }
+  .course-info { font-size: 0.8rem; color: var(--muted); }
+  .enroll-btn { width: 100%; margin-top: 1rem; background: var(--g2); color: #fff; border: none; padding: 11px; border-radius: 50px; font-size: 0.88rem; font-family: 'Nunito', sans-serif; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+  .enroll-btn:hover { background: var(--g3); }
+
+  .courses-page { padding-top: 68px; }
+  .courses-page-header { background: linear-gradient(135deg, var(--g2) 0%, var(--b1) 100%); padding: 4rem 5%; color: #fff; }
+  .courses-page-header h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300; margin-bottom: 0.75rem; }
+  .courses-page-header p { color: rgba(255,255,255,0.7); font-weight: 300; font-size: 1rem; }
+  .filter-bar { display: flex; gap: 1rem; padding: 1.5rem 5%; background: var(--cream); border-bottom: 1px solid var(--sand); flex-wrap: wrap; }
+  .filter-btn { padding: 7px 20px; border-radius: 50px; border: 1.5px solid var(--sand); background: #fff; font-size: 0.82rem; font-family: 'Nunito', sans-serif; font-weight: 600; cursor: pointer; color: var(--muted); transition: all 0.2s; }
+  .filter-btn.active, .filter-btn:hover { background: var(--g2); color: #fff; border-color: var(--g2); }
+  .courses-full-grid { padding: 3rem 5%; }
+
+  .testimonial-section { background: var(--g1); padding: 5rem 5%; }
+  .testimonial-section .section-tag { color: var(--g4); }
+  .testimonial-section .section-title { color: #fff; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .testimonial-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 2rem; }
+  .t-stars { color: var(--g4); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 2px; }
+  .t-text { color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.75; font-style: italic; font-family: 'Cormorant Garamond', serif; font-weight: 300; margin-bottom: 1.25rem; }
+  .t-author { display: flex; align-items: center; gap: 10px; }
+  .t-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--g3); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: #fff; font-weight: 600; flex-shrink: 0; }
+  .t-name { font-size: 0.88rem; color: #fff; font-weight: 600; }
+  .t-loc { font-size: 0.78rem; color: rgba(255,255,255,0.45); }
+
+  footer { background: var(--g1); padding: 3rem 5% 2rem; border-top: 1px solid rgba(255,255,255,0.07); }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: #fff; margin-bottom: 0.75rem; }
+  .footer-brand span { color: var(--g4); }
+  .footer-desc { color: rgba(255,255,255,0.45); font-size: 0.85rem; line-height: 1.7; font-weight: 300; }
+  .footer-col h4 { color: rgba(255,255,255,0.55); font-family: 'Nunito', sans-serif; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; font-weight: 700; }
+  .footer-col a { display: block; color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.88rem; margin-bottom: 0.5rem; cursor: pointer; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--g4); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 1.5rem; display: flex; justify-content: space-between; }
+  .footer-bottom p { color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+
+  .modal-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(13,43,28,0.6); backdrop-filter: blur(6px); align-items: center; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--ivory); border-radius: 20px; padding: 2.5rem; width: 90%; max-width: 420px; position: relative; animation: modalIn 0.3s ease both; }
+  @keyframes modalIn { from{opacity:0;transform:scale(0.94)} to{opacity:1;transform:scale(1)} }
+  .modal-close { position: absolute; top: 1.25rem; right: 1.25rem; background: var(--sand); border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1.1rem; color: var(--muted); display: flex; align-items: center; justify-content: center; }
+  .modal-tabs { display: flex; gap: 0; margin-bottom: 2rem; border-bottom: 2px solid var(--sand); }
+  .modal-tab { flex: 1; padding: 0.75rem; text-align: center; cursor: pointer; font-size: 0.9rem; font-weight: 600; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+  .modal-tab.active { color: var(--g2); border-bottom-color: var(--g2); }
+  .modal h2 { font-size: 1.8rem; font-weight: 300; color: var(--g1); margin-bottom: 0.25rem; }
+  .modal p.modal-sub { color: var(--muted); font-size: 0.88rem; margin-bottom: 1.75rem; font-weight: 300; }
+  .form-group { margin-bottom: 1.1rem; }
+  .form-group label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-bottom: 0.4rem; letter-spacing: 0.05em; text-transform: uppercase; }
+  .form-group input, .form-group select { width: 100%; padding: 11px 14px; border: 1.5px solid var(--sand); border-radius: 10px; font-size: 0.92rem; font-family: 'Nunito', sans-serif; background: #fff; color: var(--text); outline: none; transition: border-color 0.2s; }
+  .form-group input:focus, .form-group select:focus { border-color: var(--g3); }
+  .form-error { color: #c62828; font-size: 0.8rem; margin-top: 0.4rem; display: none; }
+  .form-error.visible { display: block; }
+  .form-submit { width: 100%; background: var(--g2); color: #fff; border: none; padding: 13px; border-radius: 50px; font-size: 0.95rem; font-family: 'Nunito', sans-serif; font-weight: 700; cursor: pointer; margin-top: 0.5rem; transition: background 0.2s; letter-spacing: 0.02em; }
+  .form-submit:hover { background: var(--g3); }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .form-divider { text-align: center; color: var(--muted); font-size: 0.8rem; margin: 1rem 0; position: relative; }
+  .form-divider::before { content:''; position: absolute; left:0; top:50%; right:0; height:1px; background:var(--sand); z-index:0; }
+  .form-divider span { background: var(--ivory); padding: 0 12px; position: relative; z-index: 1; }
+  .role-select { display: flex; gap: 0.75rem; margin-bottom: 1.1rem; }
+  .role-opt { flex: 1; border: 1.5px solid var(--sand); border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.2s; }
+  .role-opt.selected { border-color: var(--g3); background: var(--g6); }
+  .role-opt span { display: block; font-size: 1.3rem; margin-bottom: 4px; }
+  .role-opt p { font-size: 0.78rem; font-weight: 600; color: var(--muted); }
+  .role-opt.selected p { color: var(--g2); }
+
+  .admin-layout { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; padding-top: 68px; }
+  .admin-sidebar { background: var(--g1); padding: 2rem 1.25rem; display: flex; flex-direction: column; gap: 0.25rem; border-right: 1px solid rgba(255,255,255,0.07); }
+  .sidebar-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.35); font-weight: 700; padding: 0 0.75rem; margin: 1rem 0 0.4rem; }
+  .sidebar-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; cursor: pointer; color: rgba(255,255,255,0.6); font-size: 0.88rem; font-weight: 500; transition: all 0.2s; }
+  .sidebar-item:hover { background: rgba(255,255,255,0.07); color: #fff; }
+  .sidebar-item.active { background: rgba(82,183,136,0.18); color: var(--g4); }
+  .sidebar-icon { font-size: 1rem; width: 22px; text-align: center; }
+  .admin-main { background: var(--cream); padding: 2.5rem; overflow-y: auto; }
+  .admin-header { margin-bottom: 2rem; }
+  .admin-header h1 { font-size: 2rem; font-weight: 300; color: var(--g1); }
+  .admin-header p { color: var(--muted); font-size: 0.9rem; margin-top: 0.25rem; }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .stat-card { background: #fff; border-radius: var(--radius); padding: 1.5rem; border: 1px solid var(--sand); transition: box-shadow 0.2s; }
+  .stat-card:hover { box-shadow: var(--shadow); }
+  .stat-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .stat-value { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 600; color: var(--g1); }
+  .stat-change { font-size: 0.8rem; margin-top: 0.25rem; font-weight: 600; }
+  .stat-up { color: var(--g3); } .stat-down { color: #e53935; }
+  .stat-icon { font-size: 1.5rem; float: right; opacity: 0.7; }
+
+  .charts-row { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+  .chart-card { background: #fff; border-radius: var(--radius); padding: 1.5rem; border: 1px solid var(--sand); }
+  .chart-card-title { font-size: 0.85rem; font-weight: 700; color: var(--g1); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 120px; }
+  .bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .bar { width: 100%; border-radius: 5px 5px 0 0; background: var(--g4); min-width: 20px; transition: opacity 0.2s; }
+  .bar:hover { opacity: 0.75; }
+  .bar-label { font-size: 0.68rem; color: var(--muted); }
+  .pie-chart-wrap { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+  .pie-legend { width: 100%; }
+  .pie-legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--muted); margin-bottom: 6px; }
+  .pie-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .pie-legend-val { margin-left: auto; font-weight: 600; color: var(--text); }
+
+  .table-card { background: #fff; border-radius: var(--radius); border: 1px solid var(--sand); overflow: hidden; margin-bottom: 2rem; }
+  .table-header { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--sand); }
+  .table-header h3 { font-size: 0.85rem; font-weight: 700; color: var(--g1); text-transform: uppercase; letter-spacing: 0.06em; }
+  .table-search { padding: 7px 14px; border: 1.5px solid var(--sand); border-radius: 50px; font-size: 0.82rem; font-family: 'Nunito', sans-serif; outline: none; color: var(--text); width: 180px; transition: border-color 0.2s; }
+  .table-search:focus { border-color: var(--g3); }
+  table { width: 100%; border-collapse: collapse; }
+  thead th { padding: 0.75rem 1rem; text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 700; border-bottom: 1px solid var(--sand); background: #fafafa; }
+  tbody tr { border-bottom: 1px solid var(--sand); transition: background 0.15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--cream); }
+  tbody td { padding: 0.85rem 1rem; font-size: 0.88rem; color: var(--text); vertical-align: middle; }
+  .status-badge { display: inline-block; padding: 3px 10px; border-radius: 50px; font-size: 0.72rem; font-weight: 700; }
+  .status-active { background: var(--g6); color: var(--g2); }
+  .status-inactive { background: #f5f5f5; color: #9e9e9e; }
+  .status-host { background: #e3f2fd; color: var(--b2); }
+  .status-banned { background: #ffebee; color: #c62828; }
+  .action-btn { background: none; border: 1px solid var(--sand); padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; color: var(--muted); font-family: 'Nunito', sans-serif; transition: all 0.2s; margin-right: 4px; }
+  .action-btn:hover { background: var(--g2); color: #fff; border-color: var(--g2); }
+  .action-btn.danger:hover { background: #c62828; border-color: #c62828; }
+
+  .mgmt-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+  .add-btn { background: var(--g2); color: #fff; border: none; padding: 10px 24px; border-radius: 50px; font-size: 0.88rem; font-family: 'Nunito', sans-serif; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+  .add-btn:hover { background: var(--g3); }
+  .revenue-total { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--g2); }
+  .revenue-label { font-size: 0.75rem; color: var(--muted); font-weight: 400; font-family: 'Nunito', sans-serif; }
+
+  .toast { position: fixed; bottom: 2rem; right: 2rem; z-index: 300; background: var(--g2); color: #fff; padding: 14px 24px; border-radius: 12px; font-size: 0.88rem; font-weight: 600; display: none; animation: toastIn 0.3s ease both; }
+  .toast.show { display: block; }
+  @keyframes toastIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+  .loading-row td { color: var(--muted); font-style: italic; text-align: center; padding: 2rem; }
+
+  @media (max-width: 768px) {
+    .stats-grid { grid-template-columns: repeat(2,1fr); }
+    .charts-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .admin-layout { grid-template-columns: 1fr; }
+    .admin-sidebar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showView('home')">🌿 Prana<span>Grove</span></div>
+  <div class="nav-links">
+    <a onclick="showView('home')" id="nl-home" class="active-link">Home</a>
+    <a onclick="showView('courses')" id="nl-courses">Courses</a>
+    <a href="#about" id="nl-about">Retreat</a>
+    <span id="admin-link" style="display:none">
+      <a onclick="showView('admin')" id="nl-admin">Admin</a>
+    </span>
+  </div>
+  <div style="display:flex;gap:0.75rem;align-items:center;">
+    <span id="admin-indicator" style="display:none" class="admin-badge">✦ Admin Mode</span>
+    <button class="nav-cta" id="nav-cta-btn" onclick="openModal()">Join Us</button>
+  </div>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<!-- ─────────────── HOME VIEW ─────────────── -->
+<div id="view-home" class="view active">
+  <section class="hero">
+    <div class="hero-orb hero-orb1"></div>
+    <div class="hero-orb hero-orb2"></div>
+    <div class="hero-content">
+      <div class="hero-tag">🌊 Forest & Ocean Retreat</div>
+      <h1>Find your <em>stillness</em> between leaf and wave</h1>
+      <p>Nestled where ancient forests meet the ocean, Prana Grove is a living sanctuary for yoga, breathwork, and inner transformation.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showView('courses')">Explore Courses</button>
+        <button class="btn-outline" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Our Retreat →</button>
+      </div>
+    </div>
+    <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+  </section>
+
+  <section class="pillars" id="about">
+    <div class="section-tag">Our Philosophy</div>
+    <h2 class="section-title">Rooted in nature, <br>open to the sky</h2>
+    <p class="section-sub">Every practice at Prana Grove is guided by three pillars of holistic living — body, breath, and belonging.</p>
+    <div class="pillars-grid">
+      <div class="pillar-card"><div class="pillar-icon">🌿</div><h3>Forest Immersion</h3><p>Open-air pavilions surrounded by ancient trees. Let the forest breathe with you. Morning fog, birdsong, and bark underfoot.</p></div>
+      <div class="pillar-card"><div class="pillar-icon">🌊</div><h3>Ocean Breathwork</h3><p>Tide-synced pranayama sessions on the shoreline at sunrise and sunset. The ocean teaches us about expansion and return.</p></div>
+      <div class="pillar-card"><div class="pillar-icon">🧘</div><h3>Expert Guidance</h3><p>Certified teachers and visiting guest hosts with decades of lineage-based training across Hatha, Vinyasa, Yin, and Kundalini.</p></div>
+      <div class="pillar-card"><div class="pillar-icon">🍃</div><h3>Conscious Nourishment</h3><p>Plant-forward meals sourced from our on-site garden and local farmers. Eating as practice, nourishment as ceremony.</p></div>
+    </div>
+  </section>
+
+  <section class="courses-section">
+    <div class="section-tag">Featured Courses</div>
+    <h2 class="section-title">Begin your journey</h2>
+    <p class="section-sub">Immersive online and in-person courses hosted by our teachers and community instructors. All levels welcome.</p>
+    <div class="courses-grid" id="home-courses">
+      <p style="color:var(--muted);padding:1rem;">Loading courses…</p>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;">
+      <button class="btn-primary" onclick="showView('courses')" style="background:var(--g2);">View All Courses →</button>
+    </div>
+  </section>
+
+  <section class="testimonial-section">
+    <div class="section-tag">Community</div>
+    <h2 class="section-title">Voices from the grove</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"The sunrise Vinyasa sessions changed how I move through the world. I came for yoga and left with a completely new relationship to stillness."</p><div class="t-author"><div class="t-avatar">SK</div><div><div class="t-name">Sonia Krauss</div><div class="t-loc">Berlin, Germany</div></div></div></div>
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"I hosted my first course here and the platform made it incredibly smooth. My students loved the experience and I'm already planning the next one."</p><div class="t-author"><div class="t-avatar">MO</div><div><div class="t-name">Marcus Oliveira</div><div class="t-loc">São Paulo, Brazil</div></div></div></div>
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"The ocean breathwork at dusk was unlike anything I've experienced. It's not just a yoga class — it's a remembering of who you are."</p><div class="t-author"><div class="t-avatar">AL</div><div><div class="t-name">Anika Lin</div><div class="t-loc">Vancouver, Canada</div></div></div></div>
+    </div>
+  </section>
+
+  <section style="background:var(--b2);padding:4rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem;">
+    <div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:#fff;margin-bottom:0.5rem;">Host your own yoga course</h2>
+      <p style="color:rgba(255,255,255,0.7);font-weight:300;">Share your practice with the world. Prana Grove gives instructors a beautiful, supported platform to teach and earn.</p>
+    </div>
+    <button class="btn-primary" onclick="openModal('host')" style="background:#fff;color:var(--b1);white-space:nowrap;">Become a Host →</button>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">🌿 Prana<span>Grove</span></div>
+        <p class="footer-desc">A sanctuary where forest and ocean meet, dedicated to the practice of yoga and the cultivation of stillness.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a onclick="showView('home')">Home</a>
+        <a onclick="showView('courses')">All Courses</a>
+        <a onclick="openModal()">Sign In</a>
+        <a onclick="openModal('host')">Become a Host</a>
+      </div>
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a onclick="openModal()">Sign In / Register</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Prana Grove. All rights reserved.</p>
+      <p>Privacy · Terms · Accessibility</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ─────────────── COURSES VIEW ─────────────── -->
+<div id="view-courses" class="view">
+  <div class="courses-page">
+    <div class="courses-page-header">
+      <h1>All Courses</h1>
+      <p>Browse and book transformative yoga journeys from our certified teachers and guest hosts.</p>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterCourses('all', this)">All Levels</button>
+      <button class="filter-btn" onclick="filterCourses('Beginner', this)">Beginner</button>
+      <button class="filter-btn" onclick="filterCourses('Intermediate', this)">Intermediate</button>
+      <button class="filter-btn" onclick="filterCourses('Advanced', this)">Advanced</button>
+    </div>
+    <div class="courses-full-grid">
+      <div class="courses-grid" id="all-courses-grid">
+        <p style="color:var(--muted);padding:1rem;">Loading courses…</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────── ADMIN VIEW ─────────────── -->
+<div id="view-admin" class="view">
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:1.5rem;padding:0 0.5rem;">🌿 PranaGrove</div>
+      <div class="sidebar-label">Overview</div>
+      <div class="sidebar-item active" onclick="showAdminSection('dashboard', this)"><span class="sidebar-icon">📊</span>Dashboard</div>
+      <div class="sidebar-item" onclick="showAdminSection('courses-mgmt', this)"><span class="sidebar-icon">🧘</span>Courses</div>
+      <div class="sidebar-item" onclick="showAdminSection('users', this)"><span class="sidebar-icon">👥</span>Users</div>
+      <div class="sidebar-label">Revenue</div>
+      <div class="sidebar-item" onclick="showAdminSection('pricing', this)"><span class="sidebar-icon">💰</span>Pricing & Plans</div>
+      <div class="sidebar-item" onclick="showAdminSection('payments', this)"><span class="sidebar-icon">💳</span>Payments</div>
+      <div class="sidebar-label">System</div>
+      <div class="sidebar-item" onclick="showAdminSection('settings', this)"><span class="sidebar-icon">⚙️</span>Settings</div>
+      <div style="margin-top:auto;padding-top:2rem;">
+        <div class="sidebar-item" onclick="doLogout()"><span class="sidebar-icon">🚪</span>Logout</div>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+
+      <!-- DASHBOARD -->
+      <div id="admin-dashboard" class="admin-section">
+        <div class="admin-header">
+          <h1>Dashboard</h1>
+          <p>Welcome back, Admin. Here's what's happening at Prana Grove.</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-label">Total Users</div><div class="stat-value" id="stat-users">—</div></div>
+          <div class="stat-card"><div class="stat-icon">🧘</div><div class="stat-label">Active Courses</div><div class="stat-value" id="stat-courses">—</div></div>
+          <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Monthly Revenue</div><div class="stat-value" id="stat-revenue">—</div></div>
+          <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-label">Avg. Rating</div><div class="stat-value" id="stat-rating">—</div></div>
+        </div>
+        <div class="charts-row">
+          <div class="chart-card">
+            <div class="chart-card-title">Revenue – Last Months</div>
+            <div class="bar-chart" id="revenue-chart"></div>
+            <div id="revenue-labels" style="margin-top:6px;"></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-title">User Roles</div>
+            <div class="pie-chart-wrap">
+              <svg viewBox="0 0 110 110" width="110" height="110">
+                <circle cx="55" cy="55" r="40" fill="none" stroke="#e8ddd0" stroke-width="20"/>
+                <circle id="pie-students" cx="55" cy="55" r="40" fill="none" stroke="#52b788" stroke-width="20" stroke-dasharray="176 75" stroke-dashoffset="0" transform="rotate(-90 55 55)"/>
+                <circle id="pie-hosts" cx="55" cy="55" r="40" fill="none" stroke="#0077b6" stroke-width="20" stroke-dasharray="56 195" stroke-dashoffset="-176" transform="rotate(-90 55 55)"/>
+                <circle id="pie-admins" cx="55" cy="55" r="40" fill="none" stroke="#ffb347" stroke-width="20" stroke-dasharray="19 232" stroke-dashoffset="-232" transform="rotate(-90 55 55)"/>
+                <text x="55" y="58" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="14" fill="#1a3d2b" font-weight="600" id="pie-total">—</text>
+              </svg>
+              <div class="pie-legend" id="pie-legend">
+                <div class="pie-legend-item"><div class="pie-dot" style="background:#52b788"></div>Students<span class="pie-legend-val" id="pct-student">—</span></div>
+                <div class="pie-legend-item"><div class="pie-dot" style="background:#0077b6"></div>Hosts<span class="pie-legend-val" id="pct-host">—</span></div>
+                <div class="pie-legend-item"><div class="pie-dot" style="background:#ffb347"></div>Admins<span class="pie-legend-val" id="pct-admin">—</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Recent Users</h3>
+            <input class="table-search" placeholder="🔍 Search users…" oninput="filterUsers(this.value)"/>
+          </div>
+          <table>
+            <thead><tr><th>User</th><th>Role</th><th>Status</th><th>Enrolled</th><th>Revenue</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="user-table-body"><tr class="loading-row"><td colspan="7">Loading users…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- COURSES MGMT -->
+      <div id="admin-courses-mgmt" class="admin-section" style="display:none;">
+        <div class="admin-header"><h1>Course Management</h1><p>Manage all hosted and in-person yoga courses across the platform.</p></div>
+        <div class="mgmt-toolbar">
+          <div><div class="revenue-label">Total Course Revenue (YTD)</div><div class="revenue-total" id="admin-total-revenue">—</div></div>
+          <button class="add-btn" onclick="showToast('Course editor coming soon!')">+ Add New Course</button>
+        </div>
+        <div class="table-card">
+          <div class="table-header"><h3>All Courses</h3><input class="table-search" placeholder="🔍 Search courses…" oninput="filterAdminCourses(this.value)"/></div>
+          <table>
+            <thead><tr><th>Course</th><th>Host</th><th>Level</th><th>Price</th><th>Students</th><th>Rating</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="course-table-body"><tr class="loading-row"><td colspan="8">Loading courses…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- USERS -->
+      <div id="admin-users" class="admin-section" style="display:none;">
+        <div class="admin-header"><h1>User Management</h1><p>Manage student accounts, host profiles, and permissions.</p></div>
+        <div class="table-card">
+          <div class="table-header"><h3>All Users</h3><input class="table-search" placeholder="🔍 Search…" oninput="filterAllUsers(this.value)"/></div>
+          <table>
+            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="all-users-body"><tr class="loading-row"><td colspan="6">Loading users…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PRICING -->
+      <div id="admin-pricing" class="admin-section" style="display:none;">
+        <div class="admin-header"><h1>Pricing & Plans</h1><p>Configure membership tiers and host commission rates.</p></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1rem;" id="plans-grid">
+          <p style="color:var(--muted);">Loading plans…</p>
+        </div>
+        <div class="chart-card" style="margin-top:1.5rem;">
+          <div class="chart-card-title">Host Commission Structure</div>
+          <table style="margin-top:1rem;">
+            <thead><tr><th>Tier</th><th>Host Keeps</th><th>Platform Fee</th><th>Requirement</th></tr></thead>
+            <tbody>
+              <tr><td>Starter Host</td><td style="color:var(--g3);font-weight:600;">70%</td><td>30%</td><td>Under 50 students</td></tr>
+              <tr><td>Verified Host</td><td style="color:var(--g3);font-weight:600;">80%</td><td>20%</td><td>50+ students + 4.5★</td></tr>
+              <tr><td>Grove Master</td><td style="color:var(--g3);font-weight:600;">90%</td><td>10%</td><td>200+ students + 4.8★</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PAYMENTS -->
+      <div id="admin-payments" class="admin-section" style="display:none;">
+        <div class="admin-header"><h1>Payments</h1><p>Track transactions, payouts, and billing history.</p></div>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-label">Total Revenue (YTD)</div><div class="stat-value" id="pay-ytd">—</div></div>
+          <div class="stat-card"><div class="stat-label">Pending Payouts</div><div class="stat-value" id="pay-pending">—</div></div>
+          <div class="stat-card"><div class="stat-label">Failed Payments</div><div class="stat-value" id="pay-failed">—</div></div>
+          <div class="stat-card"><div class="stat-label">Refunds Issued</div><div class="stat-value">—</div></div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div id="admin-settings" class="admin-section" style="display:none;">
+        <div class="admin-header"><h1>Settings</h1><p>Configure platform-wide settings and integrations.</p></div>
+        <div class="chart-card" id="settings-card">
+          <div class="chart-card-title">Platform Settings</div>
+          <p style="color:var(--muted);margin-top:1rem;">Loading settings…</p>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ─────────────── AUTH MODAL ─────────────── -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="auth-modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-tabs">
+      <div class="modal-tab active" onclick="switchTab('login', this)">Sign In</div>
+      <div class="modal-tab" onclick="switchTab('register', this)">Register</div>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="tab-login">
+      <h2>Welcome back</h2>
+      <p class="modal-sub">Sign in to continue your practice.</p>
+      <div class="form-group"><label>Email</label><input id="login-email" type="email" placeholder="you@email.com"/></div>
+      <div class="form-group"><label>Password</label><input id="login-password" type="password" placeholder="••••••••"/></div>
+      <p class="form-error" id="login-error"></p>
+      <button class="form-submit" id="login-btn" onclick="doLogin()">Sign In →</button>
+    </div>
+
+    <!-- REGISTER -->
+    <div id="tab-register" style="display:none;">
+      <h2>Join Prana Grove</h2>
+      <p class="modal-sub">Create your account and begin your journey.</p>
+      <div class="role-select">
+        <div class="role-opt selected" onclick="selectRole(this)"><span>🧘</span><p>Student</p></div>
+        <div class="role-opt" onclick="selectRole(this)"><span>🌿</span><p>Host / Teacher</p></div>
+      </div>
+      <div class="form-group"><label>Full Name</label><input id="reg-name" type="text" placeholder="Your name"/></div>
+      <div class="form-group"><label>Email</label><input id="reg-email" type="email" placeholder="you@email.com"/></div>
+      <div class="form-group"><label>Password</label><input id="reg-password" type="password" placeholder="Create a password"/></div>
+      <p class="form-error" id="reg-error"></p>
+      <button class="form-submit" id="reg-btn" onclick="doRegister()">Create Account →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── Config ───────────────────────────────────────────────────────────────────
+const API_BASE = 'http://localhost:4000/api';
+
+// ─── Token helpers ────────────────────────────────────────────────────────────
+const getToken = () => localStorage.getItem('pg_access');
+const setTokens = (a, r) => { localStorage.setItem('pg_access', a); localStorage.setItem('pg_refresh', r); };
+const clearTokens = () => { localStorage.removeItem('pg_access'); localStorage.removeItem('pg_refresh'); };
+function getCurrentUser() {
+  const t = getToken();
+  if (!t) return null;
+  try { return JSON.parse(atob(t.split('.')[1])); } catch { return null; }
+}
+
+// ─── API wrapper ──────────────────────────────────────────────────────────────
+async function apiFetch(path, options = {}) {
+  const token = getToken();
+  const headers = { 'Content-Type': 'application/json', ...options.headers };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+  const res = await fetch(API_BASE + path, { ...options, headers });
+  const data = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
+  if (!res.ok) throw new Error(data.error || 'Request failed');
+  return data;
+}
+
+// ─── Auth ─────────────────────────────────────────────────────────────────────
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const errEl = document.getElementById('login-error');
+  const btn = document.getElementById('login-btn');
+  errEl.classList.remove('visible');
+  if (!email || !password) { errEl.textContent = 'Email and password are required.'; errEl.classList.add('visible'); return; }
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  try {
+    const { accessToken, refreshToken, user } = await apiFetch('/auth/login', {
+      method: 'POST', body: JSON.stringify({ email, password })
+    });
+    setTokens(accessToken, refreshToken);
+    onAuthSuccess(user);
+  } catch (err) {
+    errEl.textContent = err.message;
+    errEl.classList.add('visible');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Sign In →';
+  }
+}
+
+async function doRegister() {
+  const fullName = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const password = document.getElementById('reg-password').value;
+  const roleText = document.querySelector('.role-opt.selected p')?.textContent ?? '';
+  const role = roleText.toLowerCase().includes('host') ? 'host' : 'student';
+  const errEl = document.getElementById('reg-error');
+  const btn = document.getElementById('reg-btn');
+  errEl.classList.remove('visible');
+  if (!fullName || !email || !password) { errEl.textContent = 'All fields are required.'; errEl.classList.add('visible'); return; }
+  if (password.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; errEl.classList.add('visible'); return; }
+  btn.disabled = true; btn.textContent = 'Creating account…';
+  try {
+    const { accessToken, refreshToken, user } = await apiFetch('/auth/register', {
+      method: 'POST', body: JSON.stringify({ email, password, full_name: fullName, role })
+    });
+    setTokens(accessToken, refreshToken);
+    onAuthSuccess(user);
+    showToast('✅ Welcome to Prana Grove! 🌿');
+  } catch (err) {
+    errEl.textContent = err.message;
+    errEl.classList.add('visible');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Create Account →';
+  }
+}
+
+function onAuthSuccess(user) {
+  closeModal();
+  const btn = document.getElementById('nav-cta-btn');
+  btn.textContent = user.full_name.split(' ')[0];
+  btn.onclick = doLogout;
+  if (user.role === 'admin') {
+    document.getElementById('admin-link').style.display = '';
+    document.getElementById('admin-indicator').style.display = '';
+    showView('admin');
+  } else {
+    showToast('✅ Welcome back, ' + user.full_name.split(' ')[0] + '!');
+  }
+}
+
+async function doLogout() {
+  try { await apiFetch('/auth/logout', { method: 'POST' }); } catch {}
+  clearTokens();
+  const btn = document.getElementById('nav-cta-btn');
+  btn.textContent = 'Join Us'; btn.onclick = () => openModal();
+  document.getElementById('admin-link').style.display = 'none';
+  document.getElementById('admin-indicator').style.display = 'none';
+  showView('home');
+  showToast('Logged out successfully');
+}
+
+// Restore session on page load
+function restoreSession() {
+  const user = getCurrentUser();
+  if (!user) return;
+  const btn = document.getElementById('nav-cta-btn');
+  btn.textContent = (user.full_name || user.email || 'Account').split(' ')[0];
+  btn.onclick = doLogout;
+  if (user.role === 'admin') {
+    document.getElementById('admin-link').style.display = '';
+    document.getElementById('admin-indicator').style.display = '';
+  }
+}
+
+// ─── Courses ──────────────────────────────────────────────────────────────────
+let allCourses = [];
+const THUMB_STYLES = ['green', 'blue', 'teal'];
+
+function courseThumbStyle(idx) { return THUMB_STYLES[idx % 3]; }
+
+function renderCourseCard(c, idx = 0) {
+  const level = (c.level || 'beginner').toLowerCase();
+  const style = courseThumbStyle(idx);
+  const emoji = c.emoji || '🧘';
+  const price = Number(c.price ?? 0);
+  const rating = Number(c.avg_rating ?? 0).toFixed(1);
+  const weeks = c.duration_weeks ? `${c.duration_weeks} weeks` : '';
+  const host = c.host_name || '';
+  const safeTitle = (c.title || '').replace(/'/g, "\\'");
+  return `
+    <div class="course-card">
+      <div class="course-thumb ${style}">${emoji}</div>
+      <div class="course-body">
+        <span class="course-level level-${level}">${c.level}</span>
+        <h3>${c.title}</h3>
+        <p>${c.description || ''}</p>
+        <div class="course-meta">
+          <div>
+            <div class="course-price">€${price}<small>/course</small></div>
+            <div class="course-info">by ${host}</div>
+          </div>
+          <div class="course-info" style="text-align:right;">⭐ ${rating}<br>${weeks}</div>
+        </div>
+        <button class="enroll-btn" onclick="enrollInCourse('${c.id}', ${price}, '${safeTitle}')">Enroll Now</button>
+      </div>
+    </div>`;
+}
+
+async function fetchAndCacheCourses() {
+  if (allCourses.length > 0) return;
+  try {
+    allCourses = await apiFetch('/courses');
+  } catch (err) {
+    console.warn('API unavailable, using fallback courses:', err.message);
+    allCourses = FALLBACK_COURSES;
+  }
+}
+
+async function initHomeCourses() {
+  const grid = document.getElementById('home-courses');
+  if (!grid) return;
+  await fetchAndCacheCourses();
+  grid.innerHTML = allCourses.slice(0, 3).map((c, i) => renderCourseCard(c, i)).join('') || '<p style="color:var(--muted)">No courses available yet.</p>';
+}
+
+async function renderAllCoursesGrid(level) {
+  const grid = document.getElementById('all-courses-grid');
+  if (!grid) return;
+  grid.innerHTML = '<p style="color:var(--muted);padding:1rem;">Loading…</p>';
+  await fetchAndCacheCourses();
+  const filtered = level === 'all' ? allCourses : allCourses.filter(c => c.level?.toLowerCase() === level.toLowerCase());
+  grid.innerHTML = filtered.length
+    ? filtered.map((c, i) => renderCourseCard(c, i)).join('')
+    : '<p style="color:var(--muted);padding:2rem;">No courses found for this level.</p>';
+}
+
+function filterCourses(level, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAllCoursesGrid(level);
+}
+
+async function enrollInCourse(courseId, price, title) {
+  if (!getToken()) { showToast('Please sign in to enroll'); openModal(); return; }
+  try {
+    await apiFetch('/enrollments', { method: 'POST', body: JSON.stringify({ course_id: courseId }) });
+    showToast('✅ Enrolled in ' + title + '!');
+  } catch (err) {
+    showToast('❌ ' + err.message);
+  }
+}
+
+// ─── Admin – Dashboard ────────────────────────────────────────────────────────
+async function loadAdminDashboard() {
+  try {
+    const { stats, revenueByMonth, roleBreakdown } = await apiFetch('/admin/dashboard');
+
+    document.getElementById('stat-users').textContent = stats.totalUsers.toLocaleString();
+    document.getElementById('stat-courses').textContent = stats.activeCourses;
+    document.getElementById('stat-revenue').textContent = '€' + Number(stats.monthlyRevenue).toLocaleString();
+    document.getElementById('stat-rating').textContent = Number(stats.avgRating).toFixed(2);
+
+    // Payments section stats
+    const payFailed = document.getElementById('pay-failed');
+    const payPending = document.getElementById('pay-pending');
+    if (payFailed) payFailed.textContent = stats.failedPayments;
+    if (payPending) payPending.textContent = stats.pendingPayouts;
+
+    renderBarChartFromData(revenueByMonth);
+    renderRoleBreakdown(roleBreakdown, stats.totalUsers);
+  } catch (err) {
+    console.error('Dashboard load failed:', err.message);
+    showToast('⚠️ Could not load dashboard data');
+  }
+}
+
+function renderBarChartFromData(data) {
+  const chart = document.getElementById('revenue-chart');
+  const labelsEl = document.getElementById('revenue-labels');
+  if (!chart || !data?.length) return;
+  const values = data.map(d => Number(d.revenue));
+  const months = data.map(d => d.month);
+  const max = Math.max(...values) || 1;
+  chart.innerHTML = values.map((v, i) => {
+    const h = Math.max(4, Math.round((v / max) * 120));
+    const shade = i === values.length - 1 ? 'var(--g2)' : 'var(--g5)';
+    return `<div class="bar-wrap"><div class="bar" style="height:${h}px;background:${shade};" title="€${v.toLocaleString()}"></div></div>`;
+  }).join('');
+  labelsEl.innerHTML = `<div style="display:flex;gap:8px;width:100%;">${months.map(m =>
+    `<div style="flex:1;text-align:center;font-size:0.68rem;color:var(--muted);">${m.split(' ')[0]}</div>`
+  ).join('')}</div>`;
+}
+
+function renderRoleBreakdown(breakdown, total) {
+  document.getElementById('pie-total').textContent = (total || 0).toLocaleString();
+  const byRole = {};
+  breakdown.forEach(r => { byRole[r.role] = r; });
+  document.getElementById('pct-student').textContent = (byRole.student?.pct ?? 0) + '%';
+  document.getElementById('pct-host').textContent = (byRole.host?.pct ?? 0) + '%';
+  document.getElementById('pct-admin').textContent = (byRole.admin?.pct ?? 0) + '%';
+}
+
+// ─── Admin – Users ────────────────────────────────────────────────────────────
+let cachedUsers = [];
+
+async function loadAdminUsers(search = '') {
+  const tbody = document.getElementById('user-table-body');
+  const allBody = document.getElementById('all-users-body');
+  try {
+    const url = search ? `/admin/users?search=${encodeURIComponent(search)}` : '/admin/users';
+    cachedUsers = await apiFetch(url);
+    if (tbody) {
+      tbody.innerHTML = cachedUsers.map(u => `
+        <tr>
+          <td><strong>${u.full_name}</strong><br><span style="font-size:0.78rem;color:var(--muted);">${u.email}</span></td>
+          <td>${u.role}</td>
+          <td><span class="status-badge status-${u.status}">${cap(u.status)}</span></td>
+          <td>—</td><td>—</td>
+          <td><span class="status-badge status-${u.status}">${cap(u.status)}</span></td>
+          <td>
+            <button class="action-btn" onclick="showToast('Viewing ${u.full_name}')">View</button>
+            <button class="action-btn danger" onclick="setUserStatus('${u.id}','banned')">Ban</button>
+          </td>
+        </tr>`).join('') || '<tr class="loading-row"><td colspan="7">No users found.</td></tr>';
+    }
+    if (allBody) {
+      allBody.innerHTML = cachedUsers.map(u => `
+        <tr>
+          <td><strong>${u.full_name}</strong></td>
+          <td style="color:var(--muted);font-size:0.82rem;">${u.email}</td>
+          <td>${u.role}</td>
+          <td style="color:var(--muted);">${new Date(u.created_at).toLocaleDateString()}</td>
+          <td><span class="status-badge status-${u.status}">${cap(u.status)}</span></td>
+          <td>
+            <button class="action-btn" onclick="setUserStatus('${u.id}','active')">Activate</button>
+            <button class="action-btn danger" onclick="setUserStatus('${u.id}','banned')">Ban</button>
+          </td>
+        </tr>`).join('') || '<tr class="loading-row"><td colspan="6">No users found.</td></tr>';
+    }
+  } catch (err) {
+    console.error('Load users failed:', err.message);
+  }
+}
+
+async function setUserStatus(userId, status) {
+  try {
+    await apiFetch(`/admin/users/${userId}/status`, { method: 'PATCH', body: JSON.stringify({ status }) });
+    showToast(`✅ User status set to ${status}`);
+    loadAdminUsers();
+  } catch (err) { showToast('❌ ' + err.message); }
+}
+
+function filterUsers(val) { loadAdminUsers(val); }
+function filterAllUsers(val) { loadAdminUsers(val); }
+
+// ─── Admin – Courses ──────────────────────────────────────────────────────────
+let cachedAdminCourses = [];
+
+async function loadAdminCourses() {
+  const tbody = document.getElementById('course-table-body');
+  if (!tbody) return;
+  try {
+    cachedAdminCourses = await apiFetch('/admin/courses');
+    renderAdminCoursesTable(cachedAdminCourses);
+  } catch (err) {
+    tbody.innerHTML = `<tr class="loading-row"><td colspan="8">Failed to load courses.</td></tr>`;
+  }
+}
+
+function renderAdminCoursesTable(courses) {
+  const tbody = document.getElementById('course-table-body');
+  if (!tbody) return;
+  tbody.innerHTML = courses.map(c => `
+    <tr>
+      <td><strong>${c.emoji || '🧘'} ${c.title}</strong></td>
+      <td>${c.host_name || '—'}</td>
+      <td><span class="status-badge level-${(c.level||'').toLowerCase()}">${c.level}</span></td>
+      <td>€${c.price}</td>
+      <td>${c.total_students}</td>
+      <td>⭐ ${Number(c.avg_rating).toFixed(1)}</td>
+      <td><span class="status-badge status-${c.status === 'live' ? 'active' : 'inactive'}">${c.status}</span></td>
+      <td>
+        <button class="action-btn" onclick="setCourseStatus('${c.id}','live')">Live</button>
+        <button class="action-btn danger" onclick="setCourseStatus('${c.id}','paused')">Pause</button>
+      </td>
+    </tr>`).join('') || '<tr class="loading-row"><td colspan="8">No courses found.</td></tr>';
+}
+
+function filterAdminCourses(val) {
+  const filtered = val
+    ? cachedAdminCourses.filter(c => c.title.toLowerCase().includes(val.toLowerCase()) || (c.host_name||'').toLowerCase().includes(val.toLowerCase()))
+    : cachedAdminCourses;
+  renderAdminCoursesTable(filtered);
+}
+
+async function setCourseStatus(courseId, status) {
+  try {
+    await apiFetch(`/admin/courses/${courseId}/status`, { method: 'PATCH', body: JSON.stringify({ status }) });
+    showToast(`✅ Course set to ${status}`);
+    loadAdminCourses();
+  } catch (err) { showToast('❌ ' + err.message); }
+}
+
+// ─── Admin – Plans ────────────────────────────────────────────────────────────
+async function loadAdminPlans() {
+  const grid = document.getElementById('plans-grid');
+  if (!grid) return;
+  try {
+    const plans = await apiFetch('/plans');
+    grid.innerHTML = plans.map(p => `
+      <div class="stat-card" style="text-align:center;padding:2rem;${p.slug==='grove_pass'?'border-color:var(--g3);border-width:2px;':''}">
+        <h3 style="font-size:1.4rem;font-weight:300;margin-bottom:0.5rem;">${p.name}</h3>
+        <div class="stat-value">€${p.price_monthly}${p.price_monthly>0?'/mo':''}</div>
+        <p style="color:var(--muted);font-size:0.85rem;margin:0.75rem 0;">${formatFeatures(p.features)}</p>
+        <button class="action-btn" onclick="showToast('Plan editor coming soon!')">Edit Plan</button>
+      </div>`).join('');
+  } catch (err) {
+    grid.innerHTML = '<p style="color:var(--muted)">Could not load plans.</p>';
+  }
+}
+
+function formatFeatures(f) {
+  if (!f) return '';
+  const parts = [];
+  if (f.free_classes_per_month === -1) parts.push('Unlimited classes');
+  else if (f.free_classes_per_month) parts.push(`${f.free_classes_per_month} free class/mo`);
+  if (f.downloads) parts.push('Downloads');
+  if (f.retreat_stays) parts.push('Retreat stays');
+  if (f.one_on_one) parts.push('1:1 sessions');
+  return parts.join(' · ');
+}
+
+// ─── Admin – Settings ─────────────────────────────────────────────────────────
+async function loadAdminSettings() {
+  const card = document.getElementById('settings-card');
+  if (!card) return;
+  try {
+    const settings = await apiFetch('/admin/settings');
+    const rows = settings.map(s => {
+      const val = s.value;
+      const isBool = val === true || val === false || val === 'true' || val === 'false';
+      const checked = (val === true || val === 'true') ? 'checked' : '';
+      return `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--sand);">
+          <div>
+            <strong style="font-size:0.9rem;">${formatSettingKey(s.key)}</strong>
+            <p style="font-size:0.8rem;color:var(--muted);">${s.key}</p>
+          </div>
+          ${isBool
+            ? `<label style="position:relative;display:inline-block;width:44px;height:24px;" onclick="toggleSetting('${s.key}', ${!(val===true||val==='true')})">
+                 <span style="position:absolute;inset:0;background:${checked?'var(--g4)':'var(--sand)'};border-radius:50px;cursor:pointer;"></span>
+               </label>`
+            : `<span style="font-size:0.88rem;color:var(--text);font-weight:600;">${val}</span>`
+          }
+        </div>`;
+    }).join('');
+    card.innerHTML = `<div class="chart-card-title">Platform Settings</div><div style="margin-top:1rem;">${rows}</div>`;
+  } catch (err) {
+    card.innerHTML = '<div class="chart-card-title">Platform Settings</div><p style="color:var(--muted);margin-top:1rem;">Could not load settings.</p>';
+  }
+}
+
+async function toggleSetting(key, newValue) {
+  try {
+    await apiFetch('/admin/settings', { method: 'PATCH', body: JSON.stringify({ key, value: newValue }) });
+    showToast(`✅ ${formatSettingKey(key)} updated`);
+    loadAdminSettings();
+  } catch (err) { showToast('❌ ' + err.message); }
+}
+
+function formatSettingKey(key) {
+  return key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+}
+
+// ─── Navigation ───────────────────────────────────────────────────────────────
+function showView(view) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + view).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active-link'));
+  const el = document.getElementById('nl-' + view);
+  if (el) el.classList.add('active-link');
+  window.scrollTo(0, 0);
+
+  if (view === 'courses') { allCourses = []; renderAllCoursesGrid('all'); }
+  if (view === 'admin') {
+    loadAdminDashboard();
+    loadAdminUsers();
+    loadAdminCourses();
+  }
+}
+
+function showAdminSection(name, el) {
+  document.querySelectorAll('.admin-section').forEach(s => s.style.display = 'none');
+  document.getElementById('admin-' + name).style.display = 'block';
+  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+
+  if (name === 'users') loadAdminUsers();
+  if (name === 'courses-mgmt') loadAdminCourses();
+  if (name === 'pricing') loadAdminPlans();
+  if (name === 'settings') loadAdminSettings();
+  if (name === 'payments') loadAdminDashboard();
+}
+
+// ─── Modal ────────────────────────────────────────────────────────────────────
+function openModal(role) {
+  document.getElementById('modal-overlay').classList.add('open');
+  if (role === 'host') switchTab('register', document.querySelectorAll('.modal-tab')[1]);
+}
+function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+function closeModalOutside(e) { if (e.target.id === 'modal-overlay') closeModal(); }
+function switchTab(tab, el) {
+  document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-login').style.display = tab === 'login' ? '' : 'none';
+  document.getElementById('tab-register').style.display = tab === 'register' ? '' : 'none';
+}
+function selectRole(el) {
+  document.querySelectorAll('.role-opt').forEach(r => r.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// ─── Toast ────────────────────────────────────────────────────────────────────
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ─── Util ─────────────────────────────────────────────────────────────────────
+function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; }
+
+// ─── Fallback courses (shown when API is unreachable) ─────────────────────────
+const FALLBACK_COURSES = [
+  { id:'1', title:'Sunrise Vinyasa Flow', host_name:'Maya Chen', level:'Beginner', price:49, total_students:284, avg_rating:4.9, duration_weeks:6, emoji:'🌅', description:'Awaken your body with fluid morning sequences designed to energise and ground.' },
+  { id:'2', title:'Deep Yin & Meditation', host_name:'Arjun Patel', level:'Beginner', price:39, total_students:198, avg_rating:4.8, duration_weeks:4, emoji:'🌙', description:'Slow, long-held postures paired with guided meditation to release deep tension.' },
+  { id:'3', title:'Ocean Breathwork Series', host_name:'Sofia Reyes', level:'Intermediate', price:65, total_students:142, avg_rating:5.0, duration_weeks:5, emoji:'🌊', description:'Tide-synced pranayama practices drawing inspiration from oceanic rhythms.' },
+  { id:'4', title:'Kundalini Awakening', host_name:'Leila Nouri', level:'Intermediate', price:79, total_students:97, avg_rating:4.7, duration_weeks:8, emoji:'🔥', description:'An authentic Kundalini journey covering kriyas, mantras, and chakra activation.' },
+  { id:'5', title:'Forest Hatha Immersion', host_name:'Takumi Yoshi', level:'Beginner', price:55, total_students:311, avg_rating:4.9, duration_weeks:6, emoji:'🌲', description:'Classical Hatha yoga in natural forest settings. Strength, flexibility, deep grounding.' },
+  { id:'6', title:'Advanced Ashtanga', host_name:'Priya Iyer', level:'Advanced', price:95, total_students:61, avg_rating:4.9, duration_weeks:10, emoji:'⚡', description:'A rigorous traditional Ashtanga Mysore practice for dedicated students.' },
+];
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+restoreSession();
+initHomeCourses();
+</script>
+</body>
+</html>
